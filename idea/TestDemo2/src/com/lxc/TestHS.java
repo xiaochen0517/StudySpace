@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Enumeration;
 
 @WebServlet("/tesths")
 public class TestHS extends HttpServlet {
@@ -21,6 +22,15 @@ public class TestHS extends HttpServlet {
         System.out.println(req.getRequestURL());
         System.out.println(req.getProtocol());
         System.out.println(req.getRemoteAddr());
+
+        /**
+         * 获取请求头
+         */
+        Enumeration<String> enumerations = req.getHeaderNames();
+        while (enumerations.hasMoreElements()){
+            String name = enumerations.nextElement();
+            System.out.println(name + "---->" + req.getHeader(name));
+        }
     }
 
     @Override
