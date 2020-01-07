@@ -1,4 +1,4 @@
-package com.lxc;
+package com.lxc.req;
 
 import javax.servlet.GenericServlet;
 import javax.servlet.ServletException;
