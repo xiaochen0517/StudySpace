@@ -6,11 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="db751c81-8767-42fe-beaa-5db1aab25b87" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/lxc/resp/TestStream.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/lxc/resp/TestWriter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="db751c81-8767-42fe-beaa-5db1aab25b87" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -151,11 +147,6 @@
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
               </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="Finished" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              </path>
             </expand>
             <select />
           </treeState>
@@ -181,6 +172,7 @@
       <workItem from="1578303321302" duration="1672000" />
       <workItem from="1578355002967" duration="8651000" />
       <workItem from="1578390754332" duration="1408000" />
+      <workItem from="1578441455941" duration="50000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1578276729781</created>
@@ -308,5 +300,9 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="360" y="190" width="635" height="412" key="git4idea.merge.GitPullDialog/0.27.1366.741@0.27.1366.741" timestamp="1578283457168" />
+    <state x="8" y="27" width="1339" height="741" key="new project wizard" timestamp="1578441516544">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="8" y="27" width="1339" height="741" key="new project wizard/0.27.1366.741@0.27.1366.741" timestamp="1578441516544" />
   </component>
 </project>
