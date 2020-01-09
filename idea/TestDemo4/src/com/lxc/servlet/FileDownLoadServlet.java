@@ -25,10 +25,15 @@ public class FileDownLoadServlet extends HttpServlet {
                 //获取文件输入流
                 FileInputStream fis = new FileInputStream(filepath);
 
+                //解决下载文件时中文不能正常显示
+                String agent = req.getHeader("user-agent");
+                String downloadFilename = DownLoadUntil.getFileName(agent, filename);
+                System.out.println(downloadFilename);
+
                 //设置头信息
                 String mime = context.getMimeType(filename);
                 resp.setContentType(mime);
-                resp.setHeader("content-disposition", "attachment;filename="+filename);
+                resp.setHeader("content-disposition", "attachment;filename="+downloadFilename);
 
                 //获取Servlet输出流
                 ServletOutputStream sos = resp.getOutputStream();
