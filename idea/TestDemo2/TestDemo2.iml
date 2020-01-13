@@ -18,5 +18,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 9.0.22" level="application_server_libraries" />
     <orderEntry type="library" name="servlet-api" level="project" />
+    <orderEntry type="library" name="standard" level="project" />
   </component>
 </module>
