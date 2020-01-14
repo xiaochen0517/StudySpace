@@ -10,4 +10,12 @@ public interface UserDao {
 
     boolean userLogin(String username, String password);
 
+    boolean addUser(User user);
+
+    boolean delUser(int id);
+
+    User findUser(int id);
+
+    boolean updateUser(User user, int id);
+
 }

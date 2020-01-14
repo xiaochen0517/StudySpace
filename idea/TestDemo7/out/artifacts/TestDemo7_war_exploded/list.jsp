@@ -28,6 +28,18 @@
             text-align: center;
         }
     </style>
+    <script>
+        function deleteUser(id) {
+            if (confirm("是否确认删除！")){
+                location.href = "${pageContext.request.contextPath}/deluser?id="+id;
+            }
+        }
+        function delSelected() {
+            if (confirm("是否确认删除！")) {
+                document.getElementById("selectForm").submit();
+            }
+        }
+    </script>
 </head>
 <body>
 <div class="container">
@@ -53,11 +65,11 @@
 
     <div style="float: right;margin-bottom: 5px;">
         <a class="btn btn-primary" href="add.jsp">添加联系人</a>
-        <a class="btn btn-primary" href="add.jsp">删除选中</a>
+        <a class="btn btn-primary" href="javascript:delSelected()">删除选中</a>
     </div>
 
-
-    <table border="1" class="table table-bordered table-hover">
+    <form id="selectForm" action="${pageContext.request.contextPath}/delselected" method="post">
+        <table border="1" class="table table-bordered table-hover">
         <tr class="success">
             <th>
                 <input type="checkbox">
@@ -75,17 +87,19 @@
             <c:forEach items="${users}" var="user" varStatus="u">
                 <tr>
                     <td>
-                        <input type="checkbox">
+                        <input type="checkbox" name="uid" value="${user.id}">
                     </td>
-                    <td>${user.id}</td>
+                    <td>${u.count}</td>
                     <td>${user.name}</td>
                     <td>${user.gender}</td>
                     <td>${user.age}</td>
                     <td>${user.address}</td>
                     <td>${user.qq}</td>
                     <td>${user.email}</td>
-                    <td><a class="btn btn-default btn-sm" href="update.html">修改</a>&nbsp;<a
-                            class="btn btn-default btn-sm" href="">删除</a></td>
+                    <td>
+                        <a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/finduser?id=${user.id}">修改</a>&nbsp;
+                        <a class="btn btn-default btn-sm" href="javascript:deleteUser(${user.id})">删除</a>
+                    </td>
                 </tr>
             </c:forEach>
         </c:if>
@@ -95,7 +109,7 @@
             </tr>
         </c:if>
     </table>
-
+    </form>
     <div>
         <nav aria-label="Page navigation">
             <ul class="pagination">

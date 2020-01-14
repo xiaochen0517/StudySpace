@@ -20,4 +20,24 @@ public class UserServiceImpl implements UserService {
     public boolean userLogin(String username, String password) {
         return userDao.userLogin(username, password);
     }
+
+    @Override
+    public boolean addUser(User user) {
+        return userDao.addUser(user);
+    }
+
+    @Override
+    public boolean delUser(int id) {
+        return userDao.delUser(id);
+    }
+
+    @Override
+    public User findUser(int id) {
+        return userDao.findUser(id);
+    }
+
+    @Override
+    public boolean updateUser(User user, int id) {
+        return userDao.updateUser(user,id);
+    }
 }

@@ -27,7 +27,7 @@
 <body>
 <div class="container">
     <center><h3>添加联系人页面</h3></center>
-    <form action="" method="post">
+    <form action="${pageContext.request.contextPath}/adduser" method="post">
         <div class="form-group">
             <label for="name">姓名：</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="请输入姓名">
@@ -46,7 +46,7 @@
 
         <div class="form-group">
             <label for="address">籍贯：</label>
-            <select name="address" class="form-control" id="jiguan">
+            <select name="address" class="form-control" id="address">
                 <option value="广东">广东</option>
                 <option value="广西">广西</option>
                 <option value="湖南">湖南</option>
@@ -55,20 +55,41 @@
 
         <div class="form-group">
             <label for="qq">QQ：</label>
-            <input type="text" class="form-control" name="qq" placeholder="请输入QQ号码"/>
+            <input id="qq" type="text" class="form-control" name="qq" placeholder="请输入QQ号码"/>
         </div>
 
         <div class="form-group">
             <label for="email">Email：</label>
-            <input type="text" class="form-control" name="email" placeholder="请输入邮箱地址"/>
+            <input id=email type="text" class="form-control" name="email" placeholder="请输入邮箱地址"/>
         </div>
 
         <div class="form-group" style="text-align: center">
-            <input class="btn btn-primary" type="submit" value="提交"/>
+            <input class="btn btn-primary" type="submit" onclick="commit()" value="提交"/>
             <input class="btn btn-default" type="reset" value="重置"/>
             <input class="btn btn-default" type="button" value="返回"/>
         </div>
     </form>
+
+    <!-- 出错显示的信息框 -->
+    <c:if test="${not empty add_msg}">
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                <span>&times;</span></button>
+            <strong>${add_msg}</strong>
+        </div>
+    </c:if>
 </div>
+<script>
+    function commit() {
+        var name = document.getElementById("name").value;
+        var age = document.getElementById("age").value;
+        var qq = document.getElementById("qq").value;
+        var email = document.getElementById("email").value;
+        console.log(name);
+        console.log(age);
+        console.log(qq);
+        console.log(email);
+    }
+</script>
 </body>
 </html>
