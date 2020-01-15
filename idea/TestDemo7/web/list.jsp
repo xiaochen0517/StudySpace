@@ -30,14 +30,48 @@
     </style>
     <script>
         function deleteUser(id) {
-            if (confirm("是否确认删除！")){
-                location.href = "${pageContext.request.contextPath}/deluser?id="+id;
+            if (confirm("是否确认删除！")) {
+                location.href = "${pageContext.request.contextPath}/deluser?id=" + id;
             }
         }
+
         function delSelected() {
             if (confirm("是否确认删除！")) {
                 document.getElementById("selectForm").submit();
             }
+        }
+
+        function pageSelected(pageCount) {
+            if (pageCount <= 0)
+                alert("当前已是第一页！");
+            else if (pageCount > ${page.allPageCount})
+                alert("当前已是最后一页！");
+            else
+                location.href = "${pageContext.request.contextPath}/userservlet?pageCount=" +
+                    pageCount + "&rowsCount=" + 10;
+        }
+
+        function searchUser(pageCount) {
+            var name = document.getElementById("name").value;
+            var address = document.getElementById("address").value;
+            var email = document.getElementById("email").value;
+            //url
+            var urlstr = "${pageContext.request.contextPath}/userservlet?";
+            if (pageCount <= 0)
+                alert("当前已是第一页！");
+            else if (pageCount > ${page.allPageCount})
+                alert("当前已是最后一页！");
+            else
+                urlstr += "pageCount=" + pageCount + "&rowsCount=" + 10;
+
+            console.log(name + "|" + address + "|" + email);
+            if (name != "")
+                urlstr += "&name=" + name;
+            if (address != "")
+                urlstr += "&address=" + address;
+            if (email != "")
+                urlstr += "&email=" + email;
+            location.href = urlstr;
         }
     </script>
 </head>
@@ -46,21 +80,21 @@
     <h3 style="text-align: center">用户信息列表</h3>
 
     <div style="float: left;">
-        <form class="form-inline">
+        <div class="form-inline">
             <div class="form-group">
-                <label for="one">姓名</label>
-                <input type="text" class="form-control inputl" id="one">
+                <label for="name">姓名</label>
+                <input type="text" class="form-control inputl" id="name" value="${search.name}">
             </div>
             <div class="form-group">
-                <label for="two">籍贯</label>
-                <input type="email" class="form-control inputl" id="two">
+                <label for="address">籍贯</label>
+                <input type="email" class="form-control inputl" id="address" value="${search.address}">
             </div>
             <div class="form-group">
-                <label for="three">邮箱</label>
-                <input type="email" class="form-control inputl" id="three">
+                <label for="email">邮箱</label>
+                <input type="email" class="form-control inputl" id="email" value="${search.email}">
             </div>
-            <button type="submit" class="btn btn-default">查询</button>
-        </form>
+            <button class="btn btn-default" onclick="searchUser(1)">查询</button>
+        </div>
     </div>
 
     <div style="float: right;margin-bottom: 5px;">
@@ -70,66 +104,69 @@
 
     <form id="selectForm" action="${pageContext.request.contextPath}/delselected" method="post">
         <table border="1" class="table table-bordered table-hover">
-        <tr class="success">
-            <th>
-                <input type="checkbox">
-            </th>
-            <th>编号</th>
-            <th>姓名</th>
-            <th>性别</th>
-            <th>年龄</th>
-            <th>籍贯</th>
-            <th>QQ</th>
-            <th>邮箱</th>
-            <th>操作</th>
-        </tr>
-        <c:if test="${not empty users}">
-            <c:forEach items="${users}" var="user" varStatus="u">
-                <tr>
-                    <td>
-                        <input type="checkbox" name="uid" value="${user.id}">
-                    </td>
-                    <td>${u.count}</td>
-                    <td>${user.name}</td>
-                    <td>${user.gender}</td>
-                    <td>${user.age}</td>
-                    <td>${user.address}</td>
-                    <td>${user.qq}</td>
-                    <td>${user.email}</td>
-                    <td>
-                        <a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/finduser?id=${user.id}">修改</a>&nbsp;
-                        <a class="btn btn-default btn-sm" href="javascript:deleteUser(${user.id})">删除</a>
-                    </td>
-                </tr>
-            </c:forEach>
-        </c:if>
-        <c:if test="${empty users}">
-            <tr>
-                <td colspan="9">无数据</td>
+            <tr class="success">
+                <th>
+                    <input type="checkbox">
+                </th>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>籍贯</th>
+                <th>QQ</th>
+                <th>邮箱</th>
+                <th>操作</th>
             </tr>
-        </c:if>
-    </table>
+            <c:if test="${not empty users}">
+                <c:forEach items="${users}" var="user" varStatus="u">
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="uid" value="${user.id}">
+                        </td>
+                        <td>${u.count}</td>
+                        <td>${user.name}</td>
+                        <td>${user.gender}</td>
+                        <td>${user.age}</td>
+                        <td>${user.address}</td>
+                        <td>${user.qq}</td>
+                        <td>${user.email}</td>
+                        <td>
+                            <a class="btn btn-default btn-sm"
+                               href="${pageContext.request.contextPath}/finduser?id=${user.id}">修改</a>&nbsp;
+                            <a class="btn btn-default btn-sm" href="javascript:deleteUser(${user.id})">删除</a>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </c:if>
+            <c:if test="${empty users}">
+                <tr>
+                    <td colspan="9">无数据</td>
+                </tr>
+            </c:if>
+        </table>
     </form>
     <div>
         <nav aria-label="Page navigation">
             <ul class="pagination">
                 <li>
-                    <a href="#" aria-label="Previous">
+                    <a href="javascript:searchUser(${page.locaPageCount-1})" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
+                <c:forEach begin="1" end="${page.allPageCount}" var="count">
+                    <li
+                            <c:if test="${page.locaPageCount == count}">
+                                class="active"
+                            </c:if>
+                    ><a href="javascript:searchUser(${count})">${count}</a></li>
+                </c:forEach>
                 <li>
-                    <a href="#" aria-label="Next">
+                    <a href="javascript:searchUser(${page.locaPageCount+1})" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
                 <span style="margin-left: 10px; font-size: 20px">
-                    共16条，共4页
+                    共${page.allRowsCount}条，共${page.allPageCount}页
                 </span>
             </ul>
         </nav>

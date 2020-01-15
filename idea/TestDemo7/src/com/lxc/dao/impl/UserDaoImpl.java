@@ -1,6 +1,7 @@
 package com.lxc.dao.impl;
 
 import com.lxc.dao.UserDao;
+import com.lxc.domain.Search;
 import com.lxc.domain.User;
 import com.lxc.util.JDBCUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -55,5 +56,41 @@ public class UserDaoImpl implements UserDao {
         int update = template.update(sql, user.getName(), user.getGender(),
                 user.getAge(), user.getAddress(), user.getQq(), user.getEmail(), id);
         return update == 1;
+    }
+
+    @Override
+    public List<User> findPageUser(int startCount, int rowsCount) {
+        String sql = "select * from user limit ?,?";
+        List<User> query = template.query(sql, new BeanPropertyRowMapper<User>(User.class),
+                startCount, rowsCount);
+        return query;
+    }
+
+    @Override
+    public int findRowsCount() {
+        String sql = "select count(id) from user";
+        int count = template.queryForObject(sql, Integer.class);
+        return count;
+    }
+
+    @Override
+    public List<User> findSearchUser(int startCount, int rowsCount, Search search) {
+        String sql = "select * from user where `name` like ? and `address` like ? and `email` like ? limit ?,?";
+        List<User> query = template.query(sql, new BeanPropertyRowMapper<User>(User.class),
+                "%" + search.getName() + "%",
+                "%" + search.getAddress() + "%",
+                "%" + search.getEmail() + "%",
+                startCount, rowsCount);
+        return query;
+    }
+
+    @Override
+    public int findSearchRowsCoun(Search search) {
+        String sql = "select count(id) from user where `name` like ? and `address` like ? and `email` like ?";
+        int count = template.queryForObject(sql, Integer.class,
+                "%"+search.getName()+"%",
+                "%"+search.getAddress()+"%",
+                "%"+search.getEmail()+"%");
+        return count;
     }
 }

@@ -4,5 +4,6 @@
     if (username == null || username.equals("")){
         response.setStatus(302);
         response.setHeader("location", "login.jsp");
+        return;
     }
 %>

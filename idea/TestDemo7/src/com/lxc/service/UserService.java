@@ -1,5 +1,6 @@
 package com.lxc.service;
 
+import com.lxc.domain.Search;
 import com.lxc.domain.User;
 
 import java.util.List;
@@ -48,5 +49,35 @@ public interface UserService {
      * @return
      */
     boolean updateUser(User user, int id);
+
+    /**
+     * 获取分页user列表
+     * @param startCount
+     * @param rowsCount
+     * @return
+     */
+    List<User> findPageUser(int startCount, int rowsCount);
+
+    /**
+     * 获取数据库总行数
+     * @return
+     */
+    int findRowsCount();
+
+    /**
+     * 获取搜索list
+     * @param startCount
+     * @param rowsCount
+     * @param search
+     * @return
+     */
+    List<User> findSearchUser(int startCount, int rowsCount, Search search);
+
+    /**
+     * 获取搜索总列数
+     * @param search
+     * @return
+     */
+    int findSearchRowsCount(Search search);
 
 }
