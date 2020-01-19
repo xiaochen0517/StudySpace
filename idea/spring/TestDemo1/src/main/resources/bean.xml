@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <context:component-scan base-package="com.lxc.service"></context:component-scan>
+
+<!--    <bean id="myService" class="com.lxc.service.impl.MyServiceImpl"-->
+<!--          init-method="init" destroy-method="destroy"></bean>-->
+
+<!--    <bean id="inFactory" class="com.lxc.factory.InstanceFactory"></bean>-->
+<!--    <bean id="myService1" factory-bean="inFactory" factory-method="getMyService"></bean>-->
+
+<!--    <bean id="myService2" class="com.lxc.factory.StaticFactory" factory-method="getMyService"></bean>-->
+
+    <!--Spring整合MyBatis框架-->
+    <!--配置连接池-->
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/study1?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false" />
+        <property name="username" value="root" />
+        <property name="password" value="23122918lxc" />
+    </bean>
+
+    <!--配置SqlSessionFactory工厂-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!--配置AccountDao接口所在包-->
+    <bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.lxc.dao"/>
+    </bean>
+
+    <!--配置Spring框架声明式事务管理-->
+    <!--配置事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+</beans>
