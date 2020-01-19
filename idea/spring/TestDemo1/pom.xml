@@ -42,12 +42,6 @@
             <artifactId>mybatis</artifactId>
             <version>3.4.5</version>
         </dependency>
-        <!--        日志-->
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.12</version>
-        </dependency>
         <!--        spring-jdbc-->
         <dependency>
             <groupId>org.springframework</groupId>
